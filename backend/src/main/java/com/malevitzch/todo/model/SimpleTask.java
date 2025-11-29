@@ -21,7 +21,7 @@ public class SimpleTask {
     
     private boolean completed = false;
 
-    SimpleTask(String name) {
+    public SimpleTask(String name) {
       this.name = name;
     }
     
