@@ -10,7 +10,7 @@ import jakarta.persistence.Table;
 @Entity
 // We have an index on the name columns since we are likely to search by name
 @Table(indexes = {@Index(name = "idx_name", columnList = "name")})
-public class SimpleTask {
+public abstract class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -21,7 +21,7 @@ public class SimpleTask {
     
     private boolean completed = false;
 
-    public SimpleTask(String name) {
+    public Task(String name) {
       this.name = name;
     }
     
@@ -42,7 +42,7 @@ public class SimpleTask {
     }
     
     // The JPA (Java Persistence API) requires a default constructor
-    protected SimpleTask() {}
+    protected Task() {}
     
     public String getTag() {
         // The tags are name#<id in base36>, used for distinguishing tasks for users

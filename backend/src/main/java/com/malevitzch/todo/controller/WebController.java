@@ -7,14 +7,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.malevitzch.todo.model.SimpleTask;
-import com.malevitzch.todo.services.SimpleTaskService;
+import com.malevitzch.todo.model.Task;
+import com.malevitzch.todo.services.TaskService;
 
 @RestController
 public class WebController {
-    private final SimpleTaskService taskService;
+    private final TaskService taskService;
 
-    public WebController(SimpleTaskService taskService) {
+    public WebController(TaskService taskService) {
         this.taskService = taskService;
     }
 
@@ -23,11 +23,13 @@ public class WebController {
         return "Hi";
     }
     @GetMapping("/all")
-    public List<SimpleTask> getPendingTasks() {
+    public List<Task> getPendingTasks() {
         return taskService.getPendingTasks();
     }
     @PostMapping("/task/add/{name}")
     public boolean addTask(@PathVariable String name) {
-        return taskService.addTask(name) != null;
+        //FIXME: impl
+        //return taskService.addTask(new SimpleTask(name)) != null;
+        return false;
     }
 }
