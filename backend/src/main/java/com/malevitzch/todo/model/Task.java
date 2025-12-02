@@ -5,9 +5,12 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Index;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
 import jakarta.persistence.Table;
 
 @Entity
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 // We have an index on the name columns since we are likely to search by name
 @Table(indexes = {@Index(name = "idx_name", columnList = "name")})
 public abstract class Task {
