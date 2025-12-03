@@ -7,8 +7,6 @@ RUN npm ci || npm install
 COPY . .
 RUN npm run build
 
-COPY . .
-
 # Run the application
 FROM nginx:alpine-slim
 COPY --from=build /app/dist /usr/share/nginx/html
