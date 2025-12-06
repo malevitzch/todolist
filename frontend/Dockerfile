@@ -4,7 +4,10 @@ WORKDIR /app
 COPY package.json package-lock.json* ./
 RUN npm ci || npm install
 
-COPY . .
+COPY src/ src/
+
+COPY index.html ./
+COPY configs/ ./
 RUN npm run build
 
 # Run the application
