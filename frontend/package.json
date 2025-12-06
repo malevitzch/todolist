@@ -1,5 +1,5 @@
 {
-  "name": "my-vite-react-app",
+  "name": "todolist",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -12,6 +12,9 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "tailwindcss": "^3.3.2",
+    "postcss": "^8.4.28",
+    "autoprefixer": "^10.4.14",
     "@vitejs/plugin-react": "^4.0.0",
     "vite": "^5.0.0"
   }

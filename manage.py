@@ -39,6 +39,12 @@ def execute_command(name: str) -> None:
             command = f"{base_cmd} down {service}"
         else:
             print(f"Unknown service: {service}")
+    elif (match := re.match(r"^new-(.+)$", name)):
+        service = match.group(1)
+        if service in services:
+            command = f"{base_cmd} up --build --force-recreate {service}" 
+        else:
+            print(f"Unknown service: {service}")
     if command is None:
         display_help()
     else:

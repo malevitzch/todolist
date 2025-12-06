@@ -1,7 +1,7 @@
 function App() {
     return (
-        <div>
-            <h1>To-Do List</h1>
+        <div className="bg-blue-500">
+            <h1>To-Do List!</h1>
         </div>
     )
 }
