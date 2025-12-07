@@ -1,9 +1,10 @@
 {
   "name": "todolist",
   "version": "1.0.0",
+  "type": "module",
   "private": true,
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host --no-open",
     "build": "vite build",
     "preview": "vite preview"
   },

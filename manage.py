@@ -45,6 +45,8 @@ def execute_command(name: str) -> None:
             command = f"{base_cmd} up --build --force-recreate {service}" 
         else:
             print(f"Unknown service: {service}")
+    elif name == "dev":
+        command = f"docker compose -f {path}/docker-compose.dev.yml up --build --force-recreate"
     if command is None:
         display_help()
     else:
