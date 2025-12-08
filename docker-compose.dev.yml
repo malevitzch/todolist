@@ -9,6 +9,12 @@ services:
       - app-network
     volumes:
       - ./frontend/src:/app/src
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
 networks:
   app-network:
     driver: bridge
