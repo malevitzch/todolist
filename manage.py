@@ -15,6 +15,8 @@ Commands:
   down             Stop all services
   up-<service>     Start a specific service
   down-<service>   Stop a specific service
+  new-<service>    Recreate a service, forcing a rebuild
+  dev              Run the development version of the application
 Services: {', '.join(services)}"""
 
 
