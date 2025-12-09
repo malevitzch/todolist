@@ -6,7 +6,9 @@ export default function App() {
     return (
         <div className="bg-blue-300 w-full h-screen">
             <BrowserRouter>
-                <Navbar />
+                <Navbar items={[
+                    {to: "/", label: "Home"},
+                    {to: "/all-tasks", label: "All Tasks"}]}/>
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/all-tasks" element={<AllTasks />} />
