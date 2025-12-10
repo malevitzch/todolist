@@ -4,7 +4,7 @@ import Home from "./pages/Home.jsx";
 import AllTasks from "./pages/AllTasks.jsx";
 export default function App() {
     return (
-        <div className="bg-blue-300 w-full h-screen">
+        <div className="bg-blue-300 w-full h-screen flex flex-col">
             <BrowserRouter>
                 <Navbar items={[
                     {to: "/", label: "Home"},
