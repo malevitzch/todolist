@@ -22,11 +22,11 @@ public class WebController {
     public String index() {
         return "Hi";
     }
-    @GetMapping("/all")
+    @GetMapping("/api/all")
     public List<Task> getPendingTasks() {
         return taskService.getPendingTasks();
     }
-    @PostMapping("/task/add/{name}")
+    @PostMapping("/api/task/add/{name}")
     public boolean addTask(@PathVariable String name) {
         //FIXME: impl
         //return taskService.addTask(new SimpleTask(name)) != null;
