@@ -26,13 +26,13 @@ def display_help() -> None:
 def execute_command(name: str) -> None:
     command: str | None = None
     if name == "up":
-        command = f"{base_cmd} up -d"
+        command = f"{base_cmd} up"
     elif name == "down":
         command = f"{base_cmd} down"
     elif (match := re.match(r"^up-(.+)$", name)):
         service = match.group(1)
         if service in services:
-            command = f"{base_cmd} up -d {service}"
+            command = f"{base_cmd} up {service}"
         else:
             print(f"Unknown service: {service}")
     elif (match := re.match(r"^down-(.+)$", name)):

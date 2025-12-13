@@ -8,10 +8,15 @@ COPY src/ src/
 
 COPY index.html ./
 COPY configs/ ./
+
 RUN npm run build
 
 # Run the application
 FROM nginx:alpine-slim
 COPY --from=build /app/dist /usr/share/nginx/html
+
+COPY nginx/nginx.conf /etc/nginx/nginx.conf
+COPY nginx/app.conf /etc/nginx/conf.d/app.conf
+
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]

@@ -8,10 +8,10 @@ export default function App() {
         <div className="bg-blue-300 w-full h-screen flex flex-col">
             <BrowserRouter>
                 <Navbar items={[
-                    {to: "/", label: "Home"},
+                    {to: "/home", label: "Home"},
                     {to: "/all-tasks", label: "All Tasks"}]}/>
                 <Routes>
-                    <Route path="/" element={<Home />} />
+                    <Route path="/home" element={<Home />} />
                     <Route path="/all-tasks" element={<AllTasks />} />
                 </Routes>
             </BrowserRouter>
