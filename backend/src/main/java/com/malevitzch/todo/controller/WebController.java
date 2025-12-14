@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.malevitzch.todo.model.MultiTask;
 import com.malevitzch.todo.model.Task;
 import com.malevitzch.todo.services.TaskService;
-
 @RestController
 public class WebController {
     private final TaskService taskService;
@@ -18,7 +17,7 @@ public class WebController {
     public WebController(TaskService taskService) {
         this.taskService = taskService;
     }
-
+    
     @GetMapping("/")
     public String index() {
         return "Hia";
