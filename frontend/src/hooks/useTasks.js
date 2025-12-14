@@ -6,5 +6,6 @@ export function useSimpleTasks() {
         queryKey: ['simple-tasks'],
         queryFn: () => fetch('/api/all').then (res => res.json()),
         staleTime: 10_000, // 10 seconds
+        refetchInterval: 10_000, // 10 seconds
     })
 }

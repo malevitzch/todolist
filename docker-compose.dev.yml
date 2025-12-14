@@ -3,10 +3,10 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile.dev
-    ports: 
-      - 5173:5173
     networks:
       - app-network
+    ports: 
+      - 5173:5173
     volumes:
       - ./frontend/src:/app/src
   backend:
@@ -17,6 +17,12 @@ services:
       - app-network
     ports:
       - 8080:8080
+    volumes:
+      - ./backend/src:/app/src
+      - ./backend/pom.xml:/app/pom.xml
+    environment:
+      SPRING_PROFILES_ACTIVE: dev
+      SPRING_DEVTOOLS_RESTART_ENABLED: "true"
 networks:
   app-network:
     driver: bridge

@@ -3,7 +3,7 @@ package com.malevitzch.todo.model;
 import jakarta.persistence.Entity;
 
 @Entity
-class MultiTask extends Task {
+public class MultiTask extends Task {
     private int completionCount = 0;
 
     public MultiTask(String name) {
