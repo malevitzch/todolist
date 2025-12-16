@@ -1,4 +1,22 @@
+
+// TODO: maybe put the invalidate hook in a separate file and generalize
+// so it can be used for other queries as well
+import { useQueryClient } from '@tanstack/react-query';
+
+export function useInvalidateSimpleTasks(delay = 500) {
+  const queryClient = useQueryClient();
+
+  const invalidate = () => {
+    setTimeout(() => {
+      queryClient.invalidateQueries(['simple-tasks']);
+    }, delay);
+  };
+
+  return invalidate;
+}
+
 export default function TaskAdder() {
+    const invalidateTasks = useInvalidateSimpleTasks();
     const handleSubmit = (e) => {
         e.preventDefault();
         const formData = new FormData(e.target);
@@ -10,7 +28,8 @@ export default function TaskAdder() {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({ name: formData.get('name') }),
-        });
+        })
+        invalidateTasks(500);
     };
 
     return (
