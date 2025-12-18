@@ -2,6 +2,7 @@ import { useSimpleTasks } from "../../hooks/useTasks"
 import TaskBox from "./TaskBox.jsx";
 export default function TaskList() {
     const {data, isLoading, error} = useSimpleTasks();
+    // TODO: error handling
     if (!isLoading) {
         return (
             <div>

@@ -1,7 +1,7 @@
 import { useInvalidateQuery } from "./../../hooks/useInvalidateQuery.js"
 
 export default function TaskAdder() {
-    const invalidateSimpleTasks = useInvalidateQuery('simple-tasks', 500);
+    const invalidateSimpleTasks = useInvalidateQuery('simple-tasks', 300);
     const handleSubmit = (e) => {
         e.preventDefault();
         const formData = new FormData(e.target);
