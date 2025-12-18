@@ -7,7 +7,7 @@ export const router = createBrowserRouter([
   {
     path: "/",
     element: (
-      <div>
+      <div className ="flex flex-col h-screen">
         <Navbar items={[
           {to: "/home", label: "Home"},
           {to: "/all-tasks", label: "All Tasks"}]}/>
