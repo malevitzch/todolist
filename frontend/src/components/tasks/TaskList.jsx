@@ -9,7 +9,7 @@ export default function TaskList() {
     else if(!isLoading) {
         return (
             // TODO: this should be based on task type
-            <div className="flex-1 overflow-y-auto">
+            <div className="flex-1 overflow-y-scroll grid grid-cols-4 gap-1 p-1 items-start auto-rows-min">
                 {data.map(task => (
                     <TaskBox key={task.id}>
                         <div>{task.name}</div>
