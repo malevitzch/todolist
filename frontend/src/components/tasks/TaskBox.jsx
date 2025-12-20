@@ -1,6 +1,6 @@
-export default function TaskBox({children}) {
+export function TaskBox({children}) {
     return (
-        <div className="w-full bg-blue-500 p-4 pl-4 border-2 border-blue-300 rounded-xl">
+        <div className="w-full bg-blue-500 py-1 px-1 border-2 border-blue-300 rounded-xl">
             {children}
         </div>
     )

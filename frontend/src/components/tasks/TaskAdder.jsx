@@ -1,6 +1,6 @@
 import { useInvalidateQuery } from "./../../hooks/useInvalidateQuery.js"
 
-export default function TaskAdder() {
+export function TaskAdder() {
     const invalidateSimpleTasks = useInvalidateQuery('simple-tasks', 300);
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -19,8 +19,8 @@ export default function TaskAdder() {
 
     return (
         <form onSubmit = {handleSubmit}>
-            <input type="text" name="name" placeholder="Task Name" required autocomplete="off" 
-                class="px-1 py-1 bg-blue-400 focus:bg-blue-500 focus:outline-none"/>
+            <input type="text" name="name" placeholder="Task Name" required autoComplete="off" 
+                className="px-1 py-1 bg-blue-400 focus:bg-blue-500 focus:outline-none"/>
         </form>
     )
 }

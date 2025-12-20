@@ -1,6 +1,6 @@
-import TaskList from "../components/tasks/TaskList";
-import TaskAdder from "../components/tasks/TaskAdder";
-export default function AllTasks() {
+import { TaskList } from "../components/tasks/TaskList";
+import { TaskAdder } from "../components/tasks/TaskAdder";
+export function AllTasks() {
     return (
         <div className="flex h-screen overflow-hidden">
             <div className="flex w-2/3 bg-blue-200">

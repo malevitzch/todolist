@@ -1,6 +1,6 @@
 import { useSimpleTasks } from "../../hooks/useTasks"
-import TaskBox from "./TaskBox.jsx";
-export default function TaskList() {
+import { MultiTask } from "./task-types/MultiTask.jsx"
+export function TaskList() {
     const {data, isLoading, error} = useSimpleTasks();
     // TODO: error
     if(error) {
@@ -11,10 +11,7 @@ export default function TaskList() {
             // TODO: this should be based on task type
             <div className="flex-1 overflow-y-scroll grid grid-cols-4 gap-1 p-1 items-start auto-rows-min">
                 {data.map(task => (
-                    <TaskBox key={task.id}>
-                        <div>{task.name}</div>
-                        <div>{task.completionCount}</div>
-                    </TaskBox>
+                    <MultiTask key={task.id} task={task} />
                 ))}
             </div>
         )
