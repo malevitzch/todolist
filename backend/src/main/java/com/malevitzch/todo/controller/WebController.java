@@ -35,4 +35,17 @@ public class WebController {
         taskService.addTask(new MultiTask(json.get("name")));
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
+
+    @PostMapping("/api/tasks/complete-multi")
+    public ResponseEntity<Void> completeMultiTask(@RequestBody Map<String, String> json) {
+        String tag = json.get("tag");
+        Task task = taskService.getTaskByTag(tag);
+        if (task == null || !(task instanceof MultiTask)) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();     
+        }
+        ((MultiTask)task).complete(1);
+        taskService.updateTask(task);
+
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
 }

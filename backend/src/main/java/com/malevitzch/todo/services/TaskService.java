@@ -26,4 +26,23 @@ public class TaskService {
     public List<Task> getPendingTasks() {
         return repository.findByCompletedFalse();
     }
+
+    public Task getTaskByTag(String tag) {
+        int hashIndex = tag.lastIndexOf('#');
+        if (hashIndex == -1) {
+            return null;
+        }
+        String idBase36 = tag.substring(hashIndex + 1);
+        Long id = Long.valueOf(idBase36, 36);
+        String name = tag.substring(0, hashIndex);
+        Task task = repository.findById(id).stream().findFirst().orElse(null);
+        if(task == null || !task.getName().equals(name)) {
+            return null;
+        }
+        return task;
+    }
+
+    public void updateTask(Task task) {
+        repository.save(task);
+    }
 }
