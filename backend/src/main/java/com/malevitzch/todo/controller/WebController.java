@@ -43,7 +43,12 @@ public class WebController {
         if (task == null || !(task instanceof MultiTask)) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();     
         }
-        ((MultiTask)task).complete(1);
+        if(json.get("count") == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();     
+        }
+        int count = Integer.parseInt(json.get("count"));
+
+        ((MultiTask)task).complete(count);
         taskService.updateTask(task);
 
         return ResponseEntity.status(HttpStatus.OK).build();
