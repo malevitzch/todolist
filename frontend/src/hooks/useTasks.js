@@ -1,10 +1,15 @@
 import { useQuery } from '@tanstack/react-query';
 
 export function useSimpleTasks() {
-    // TODO: queryFn does not handle errors yet
     return useQuery({
         queryKey: ['simple-tasks'],
-        queryFn: () => fetch('/api/all').then (res => res.json()),
+        queryFn: async () => {
+            const response = await fetch('/api/all');
+            if (!response.ok) {
+                throw new Error('Failed to fetch tasks');
+            }
+            return response.json();
+        },
         staleTime: 10_000, // 10 seconds
         refetchInterval: 10_000, // 10 seconds
     })
