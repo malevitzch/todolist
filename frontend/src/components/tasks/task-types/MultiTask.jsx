@@ -1,19 +1,28 @@
 import { TaskBox } from "../TaskBox.jsx";
 import { useInvalidateQuery } from "../../../hooks/useInvalidateQuery.js";
-
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 export function MultiTask({task}) {
-    const invalidateSimpleTasks = useInvalidateQuery('simple-tasks', 300);
+    const queryClient = useQueryClient();
     
+    const mutation = useMutation({
+        mutationFn: ({ taskTag, delta }) => {
+            return fetch('/api/tasks/complete-multi', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ tag: taskTag, count: delta }),
+            })
+            .then(res => {
+                if(!res.ok)
+                    throw new Error('Failed to update');
+            })
+        },
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ['simple-tasks'] });
+        },
+    });
     function updateCompletionCount(taskTag, delta) { 
-        fetch('/api/tasks/complete-multi', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({tag: taskTag, count: delta }),
-        });
-        invalidateSimpleTasks();
+        mutation.mutate({ taskTag, delta });
     }
 
     return (
