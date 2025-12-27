@@ -1,4 +1,7 @@
 package com.malevitzch.todo.model;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -12,7 +15,16 @@ import jakarta.persistence.Table;
 @Entity
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 // We have an index on the name columns since we are likely to search by name
-@Table(indexes = {@Index(name = "idx_name", columnList = "name")})
+@Table(indexes = {@Index(name = "idx_name", columnList = "name, id")})
+@JsonTypeInfo(
+    use = JsonTypeInfo.Id.NAME,
+    include = JsonTypeInfo.As.PROPERTY,
+    property = "@class"
+)
+@JsonSubTypes({
+    @JsonSubTypes.Type(value = OneTimeTask.class, name = "OneTimeTask"),
+    @JsonSubTypes.Type(value = MultiTask.class, name = "MultiTask"),
+})
 public abstract class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
