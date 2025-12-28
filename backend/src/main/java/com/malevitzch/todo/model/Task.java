@@ -1,6 +1,6 @@
 package com.malevitzch.todo.model;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -19,7 +19,7 @@ import jakarta.persistence.Table;
 @JsonTypeInfo(
     use = JsonTypeInfo.Id.NAME,
     include = JsonTypeInfo.As.PROPERTY,
-    property = "@class"
+    property = "type"
 )
 @JsonSubTypes({
     @JsonSubTypes.Type(value = OneTimeTask.class, name = "OneTimeTask"),

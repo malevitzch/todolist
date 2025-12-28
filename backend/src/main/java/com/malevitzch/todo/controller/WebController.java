@@ -46,6 +46,7 @@ public class WebController {
         if(json.get("count") == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();     
         }
+        // FIXME: this should be a part of a task service, not the controller
         int count = Integer.parseInt(json.get("count"));
 
         ((MultiTask)task).complete(count);
