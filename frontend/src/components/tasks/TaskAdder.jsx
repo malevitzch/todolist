@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useQueryClient, useMutation} from "@tanstack/react-query";
-import { addMultiTask, addSimpleTask } from "../../services/tasks.js";
+import { useAddMultiTask } from "../../hooks/add-task.js";
 
 function TaskAdderMenu({setMode}) {
     return (
@@ -24,24 +24,14 @@ export function TaskAdder() {
     const [mode, setMode] = useState('menu'); // 'menu' | 'add-simple' | 'add-multi'
 
     const queryClient = useQueryClient();
-    // TODO: the task addition logic should
-    // be abstracted away to a hook
-    // which in turn calls service functions
-   
-    // TODO: this will be different based on task type
-    const mutation = useMutation({
-        mutationFn: addMultiTask,
-        onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ['simple-tasks'] });
-        },
-    });
+    const multiAdder = useAddMultiTask();
 
     const handleSubmit = (e) => {
         e.preventDefault();
         const formData = new FormData(e.target);
         e.target.reset(); 
 
-        mutation.mutate({ name: formData.get('name') });
+        multiAdder.mutate({ name: formData.get('name') });
     };
 
     return (

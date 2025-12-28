@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 
 export function useSimpleTasks() {
     return useQuery({
-        queryKey: ['simple-tasks'],
+        queryKey: ['tasks'],
         queryFn: async () => {
             const response = await fetch('/api/all');
             if (!response.ok) {

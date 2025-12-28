@@ -1,4 +1,5 @@
-## TODO 
+## TODO
+- Finish the forms for TaskAdder
 - Take care of unused useInvalidateQuery hook
 - Implement auth for API
 - Automatic https certs through certbot and let's encrypt
