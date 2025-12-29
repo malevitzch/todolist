@@ -4,7 +4,7 @@ import { useAddMultiTask } from "../../hooks/add-task.js";
 
 function TaskAdderMenu({setMode}) {
     return (
-        <div className="bg-blue-200"> </div>
+        <div className="bg-blue-200">Task adding menu</div>
     )
 }
 
@@ -15,15 +15,7 @@ function AddSimpleTaskForm() {
 }
 
 function AddMultiTaskForm() {
-    return (
-        {}
-    )
-}
 
-export function TaskAdder() {
-    const [mode, setMode] = useState('menu'); // 'menu' | 'add-simple' | 'add-multi'
-
-    const queryClient = useQueryClient();
     const multiAdder = useAddMultiTask();
 
     const handleSubmit = (e) => {
@@ -39,5 +31,16 @@ export function TaskAdder() {
             <input type="text" name="name" placeholder="Task Name" required autoComplete="off" 
                 className="px-1 py-1 bg-blue-400 focus:bg-blue-500 focus:outline-none"/>
         </form>
+    )
+}
+
+export function TaskAdder() {
+    const [mode, setMode] = useState('menu'); // 'menu' | 'add-simple' | 'add-multi'
+
+    return (
+        <div>
+            <TaskAdderMenu setMode={setMode} />
+            <AddMultiTaskForm />
+        </div>
     )
 }
