@@ -2,9 +2,22 @@ import { useState } from "react";
 import { useQueryClient, useMutation} from "@tanstack/react-query";
 import { useAddMultiTask } from "../../hooks/add-task.js";
 
+function TaskAdderMenuButton({onClick, children}) {
+    return (
+        <button type="button" onClick={onClick}
+            className="px-2 py-1 bg-blue-400 rounded-full hover:shadow-md
+             hover:bg-blue-500 active:scale-90 transition-transform duration-75">
+            {children}
+        </button>
+    )
+}
+
 function TaskAdderMenu({setMode}) {
     return (
-        <div className="bg-blue-200">Task adding menu</div>
+        <div>
+            <TaskAdderMenuButton onClick={() => setMode('add-simple')}>New Simple Task</TaskAdderMenuButton>
+            <TaskAdderMenuButton onClick={() => setMode('add-multi')}>New Multi Task</TaskAdderMenuButton>
+        </div>
     )
 }
 
@@ -35,12 +48,12 @@ function AddMultiTaskForm() {
 }
 
 export function TaskAdder() {
-    const [mode, setMode] = useState('menu'); // 'menu' | 'add-simple' | 'add-multi'
+    const [mode, setMode] = useState('add-multi'); // 'default' | 'add-simple' | 'add-multi'
 
     return (
         <div>
             <TaskAdderMenu setMode={setMode} />
-            <AddMultiTaskForm />
+            {mode === 'add-multi' && <AddMultiTaskForm />}
         </div>
     )
 }
