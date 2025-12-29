@@ -1,4 +1,5 @@
 ## TODO
+- PerpetualTask and MultiTask (maybe also a real "multi" task that's like a mini checklist)
 - Finish the forms for TaskAdder
 - Take care of unused useInvalidateQuery hook
 - Implement auth for API
