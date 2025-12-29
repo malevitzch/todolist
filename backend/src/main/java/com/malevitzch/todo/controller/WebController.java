@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.malevitzch.todo.model.MultiTask;
+import com.malevitzch.todo.model.OneTimeTask;
 import com.malevitzch.todo.model.Task;
 import com.malevitzch.todo.services.TaskService;
 
@@ -33,6 +34,11 @@ public class WebController {
     @PostMapping("/api/tasks/add-multi")
     public ResponseEntity<Void> addMultiTask(@RequestBody Map<String, String> json) {
         taskService.addTask(new MultiTask(json.get("name")));
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+    @PostMapping("/api/tasks/add-simple")
+    public ResponseEntity<Void> addSimpleTask(@RequestBody Map<String, String> json) {
+        taskService.addTask(new OneTimeTask(json.get("name")));
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 

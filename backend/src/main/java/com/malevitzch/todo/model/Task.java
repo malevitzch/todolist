@@ -22,8 +22,8 @@ import jakarta.persistence.Table;
     property = "type"
 )
 @JsonSubTypes({
-    @JsonSubTypes.Type(value = OneTimeTask.class, name = "OneTimeTask"),
-    @JsonSubTypes.Type(value = MultiTask.class, name = "MultiTask"),
+    @JsonSubTypes.Type(value = OneTimeTask.class, name = "one-time"),
+    @JsonSubTypes.Type(value = MultiTask.class, name = "multi"),
 })
 public abstract class Task {
     @Id
