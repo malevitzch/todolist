@@ -50,7 +50,7 @@ function AddMultiTaskForm() {
         const formData = new FormData(e.target);
         e.target.reset(); 
 
-        multiAdder.mutate({ name: formData.get('name') });
+        multiAdder.mutate({ name: formData.get('name'), maxCompletions: parseInt(formData.get('maxCompletions')) });
     };
 
     return (
@@ -58,6 +58,11 @@ function AddMultiTaskForm() {
             <div>Adding a new MultiTask</div>
             <input type="text" name="name" placeholder="Task Name" required autoComplete="off" 
                 className="px-1 py-1 bg-blue-400 focus:bg-blue-500 focus:outline-none"/>
+            <input type="number" name="maxCompletions" placeholder="Max Completions" required min="1" autoComplete="off"
+                className="px-1 py-1 bg-blue-400 focus:bg-blue-500 focus:outline-none"/>
+          <button type="submit" className="px-2 py-1 bg-blue-400 rounded-full hover:shadow-md">
+            Submit
+          </button>
         </form>
     )
 }

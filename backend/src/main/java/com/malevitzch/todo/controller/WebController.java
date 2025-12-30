@@ -33,7 +33,10 @@ public class WebController {
     }
     @PostMapping("/api/tasks/add-multi")
     public ResponseEntity<Void> addMultiTask(@RequestBody Map<String, String> json) {
-        taskService.addTask(new MultiTask(json.get("name")));
+        // TODO: validate 
+        String name = json.get("name");
+        int maxCompletions = Integer.parseInt(json.get("maxCompletions"));
+        taskService.addTask(new MultiTask(name, maxCompletions));
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
     @PostMapping("/api/tasks/add-simple")
