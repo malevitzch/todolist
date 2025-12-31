@@ -7,7 +7,7 @@ import jakarta.persistence.Entity;
 public class MultiTask extends Task {
     private int completionCount = 0;
 
-    @Column(nullable = false)
+    @Column
     private int maxCompletions;
 
     private void updateCompletedStatus() {
