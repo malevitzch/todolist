@@ -1,8 +1,8 @@
 FROM maven:3.9-eclipse-temurin-20-alpine
 WORKDIR /app/
 
-COPY pom.xml .
+EXPOSE 8080
 
-RUN mvn dependency:go-offline
+RUN mvn -B dependency:go-offline
 
 CMD ["mvn", "spring-boot:run"]
