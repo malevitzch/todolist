@@ -10,7 +10,10 @@ public class MultiTask extends Task {
     @Column
     private int maxCompletions;
 
-    private void updateCompletedStatus() {
+    private void updateStatus() {
+        if(completionCount < 0) {
+            completionCount = 0;
+        }
         if(completionCount >= maxCompletions) {
             setCompleted(true);
         } else {
@@ -25,12 +28,12 @@ public class MultiTask extends Task {
 
     public void complete() {
         completionCount++;
-        updateCompletedStatus();
+        updateStatus();
     }
 
     public void complete(int n) {
         completionCount += n;
-        updateCompletedStatus();
+        updateStatus();
     }
 
     public int getCompletionCount() {
@@ -39,7 +42,7 @@ public class MultiTask extends Task {
 
     public void setCompletionCount(int n) {
         completionCount = n;
-        updateCompletedStatus();
+        updateStatus();
     }
 
     public int getMaxCompletions() {
