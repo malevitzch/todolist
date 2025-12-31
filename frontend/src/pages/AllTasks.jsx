@@ -7,7 +7,7 @@ export function AllTasks() {
                 <TaskList />
             </div>
             
-            <div className="w-1/3 bg-blue-300">
+            <div className="w-1/3 bg-blue-300 px-1 py-1">
                 <TaskAdder />
             </div>
         </div>

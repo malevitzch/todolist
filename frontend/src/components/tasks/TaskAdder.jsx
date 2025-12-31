@@ -55,14 +55,19 @@ function AddMultiTaskForm() {
 
     return (
         <form onSubmit = {handleSubmit}>
-            <div>Adding a new MultiTask</div>
-            <input type="text" name="name" placeholder="Task Name" required autoComplete="off" 
-                className="px-1 py-1 bg-blue-400 focus:bg-blue-500 focus:outline-none"/>
-            <input type="number" name="maxCompletions" placeholder="Max Completions" required min="1" autoComplete="off"
-                className="px-1 py-1 bg-blue-400 focus:bg-blue-500 focus:outline-none"/>
-          <button type="submit" className="px-2 py-1 bg-blue-400 rounded-full hover:shadow-md">
-            Submit
-          </button>
+            <div className="flex flex-col gap-1">
+                <div>Adding a new MultiTask</div>
+
+                <div className="flex flex-row gap-1">
+                    <input type="text" name="name" placeholder="Task Name" required autoComplete="off" 
+                        className="w-1/2 px-1 py-1 bg-blue-400 focus:bg-blue-500 focus:outline-none"/>
+                    <input type="number" name="maxCompletions" placeholder="Max Completions" required min="1" autoComplete="off"
+                        className="w-1/2 px-1 py-1 bg-blue-400 focus:bg-blue-500 focus:outline-none"/>
+                </div>
+                <button type="submit" className="px-2 py-1 bg-blue-400 rounded-full hover:shadow-md">
+                    Submit
+                </button>
+            </div>
         </form>
     )
 }
