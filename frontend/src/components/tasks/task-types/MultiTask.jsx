@@ -1,5 +1,6 @@
 import { TaskBox } from "../TaskBox.jsx";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useUpdateMultiTaskCompletion } from "../../../hooks/update-task.js";
 
 function TaskButton({ onClick, children }) {
     return (
@@ -13,26 +14,7 @@ function TaskButton({ onClick, children }) {
 
 export function MultiTask({task}) {
     const queryClient = useQueryClient();
-    
-    // FIXME: abstract this into hook + service
-    const mutation = useMutation({
-        mutationFn: async ({ taskTag, delta }) => {
-            const res = await fetch('/api/tasks/complete-multi', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ tag: taskTag, count: delta }),
-            });
-            if(!res.ok)
-                throw new Error('Failed to update');
-        },
-        onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ['tasks'] });
-        },
-    });
-    function updateCompletionCount(taskTag, delta) { 
-        mutation.mutate({ taskTag, delta });
-    }
-
+    const updateCompletion = useUpdateMultiTaskCompletion();
     return (
         <TaskBox>
             <div className="h-1/3 text-center bg-blue-500 rounded-xl">{task.tag}</div>
@@ -41,8 +23,8 @@ export function MultiTask({task}) {
                     {task.completionCount}/{task.maxCompletions}
                 </div>
                 <div className="text-right w-3/4 ml-auto">
-                    <TaskButton onClick={() => updateCompletionCount(task.tag, -1)}>-</TaskButton>           
-                    <TaskButton onClick={() => updateCompletionCount(task.tag, 1)}>+</TaskButton>
+                    <TaskButton onClick={() => updateCompletion.mutate({taskTag: task.tag, delta: -1})}>-</TaskButton>           
+                    <TaskButton onClick={() => updateCompletion.mutate({taskTag: task.tag, delta: +1})}>+</TaskButton>
                 </div>
             </div>
         </TaskBox>

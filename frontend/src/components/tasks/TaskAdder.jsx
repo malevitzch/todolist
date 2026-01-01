@@ -64,7 +64,8 @@ function AddMultiTaskForm() {
                     <input type="number" name="maxCompletions" placeholder="Max Completions" required min="1" autoComplete="off"
                         className="w-1/2 px-1 py-1 bg-blue-400 focus:bg-blue-500 focus:outline-none"/>
                 </div>
-                <button type="submit" className="px-2 py-1 bg-blue-400 rounded-full hover:shadow-md">
+                <button type="submit" className="px-2 py-1 bg-blue-400 rounded-full hover:shadow-md
+                    active:scale-y-90 active:scale-x-96 transition-transform duration-75">
                     Submit
                 </button>
             </div>
