@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.malevitzch.todo.model.MultiTask;
 import com.malevitzch.todo.model.OneTimeTask;
+import com.malevitzch.todo.model.PerpetualTask;
 import com.malevitzch.todo.model.Task;
 import com.malevitzch.todo.services.TaskService;
 
@@ -31,12 +32,18 @@ public class WebController {
     public List<Task> getPendingTasks() {
         return taskService.getPendingTasks();
     }
+    // TODO: maybe split into different endpoints for LimitedTask and PerpetualTask later
     @PostMapping("/api/tasks/add-multi")
     public ResponseEntity<Void> addMultiTask(@RequestBody Map<String, String> json) {
         // TODO: validate 
         String name = json.get("name");
-        int maxCompletions = Integer.parseInt(json.get("maxCompletions"));
-        taskService.addTask(new MultiTask(name, maxCompletions));
+        boolean perpetual = Boolean.parseBoolean(json.get("perpetual"));
+        if(perpetual)
+            taskService.addTask(new PerpetualTask(name));
+        else {
+            int maxCompletions = Integer.parseInt(json.get("maxCompletions"));  
+            taskService.addTask(new MultiTask(name, maxCompletions));
+        }
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
     @PostMapping("/api/tasks/add-simple")

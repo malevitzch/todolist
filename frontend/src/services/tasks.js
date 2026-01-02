@@ -4,7 +4,9 @@ export async function addMultiTask(task) {
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ name: task.name, "maxCompletions": task.maxCompletions }),
+        body: JSON.stringify({ name: task.name, 
+            "maxCompletions": (task.perpetual ? null : task.maxCompletions),
+            perpetual: task.perpetual }),
     });
     if (!res.ok) 
         throw new Error('Failed to add task');

@@ -1,10 +1,12 @@
 import { useSimpleTasks } from "../../hooks/useTasks"
 import { MultiTask } from "./task-types/MultiTask.jsx"
 import { OneTimeTask } from "./task-types/OneTimeTask.jsx"
+import { PerpetualTask } from "./task-types/PerpetualTask.jsx"
 
 const TASK_COMPONENTS = {
-  'one-time': OneTimeTask,
-  'multi': MultiTask,
+    'one-time': OneTimeTask,
+    'multi': MultiTask,
+    'perpetual': PerpetualTask,
 };
 
 export function TaskList() {

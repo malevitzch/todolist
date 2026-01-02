@@ -51,10 +51,14 @@ function AddMultiTaskForm() {
         const formData = new FormData(e.target);
         e.target.reset(); 
 
-        multiAdder.mutate({ name: formData.get('name'), maxCompletions: parseInt(formData.get('maxCompletions')) });
+        multiAdder.mutate({
+            name: formData.get('name'),
+            maxCompletions: parseInt(formData.get('maxCompletions')),
+            perpetual: perpetual});
     };
 
     return (
+        // TODO: fully controlled form
         <form onSubmit = {handleSubmit}>
             <div className="flex flex-col gap-1">
                 <div>Adding a new MultiTask</div>
