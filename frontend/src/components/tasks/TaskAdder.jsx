@@ -44,6 +44,7 @@ function AddSimpleTaskForm() {
 function AddMultiTaskForm() {
 
     const multiAdder = useAddMultiTask();
+    const [perpetual, setPerpetual] = useState(false);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -59,11 +60,19 @@ function AddMultiTaskForm() {
                 <div>Adding a new MultiTask</div>
 
                 <div className="flex flex-row gap-1">
+
                     <input type="text" name="name" placeholder="Task Name" required autoComplete="off" 
                         className="w-1/2 px-1 py-1 bg-blue-400 focus:bg-blue-500 focus:outline-none"/>
                     <input type="number" name="maxCompletions" placeholder="Max Completions" required min="1" autoComplete="off"
-                        className="w-1/2 px-1 py-1 bg-blue-400 focus:bg-blue-500 focus:outline-none"/>
+                        className={`w-1/2 px-1 py-1 focus:outline-none ${
+                        perpetual ? "bg-gray-300 cursor-not-allowed" : "bg-blue-400 focus:bg-blue-500"}`}
+                        disabled={perpetual}/>
                 </div>
+                <label className="flex gap-1" htmlFor="perpetual">
+                    <input type="checkbox" name="perpetual" checked={perpetual} onChange={() => setPerpetual(!perpetual)} 
+                        className="px-1 py-1 bg-blue-400 focus:bg-blue-500 focus:outline-none"/>
+                    Perpetual Task
+                </label>
                 <button type="submit" className="px-2 py-1 bg-blue-400 rounded-full hover:shadow-md
                     active:scale-y-90 active:scale-x-96 transition-transform duration-75">
                     Submit
