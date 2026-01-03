@@ -9,16 +9,11 @@ public class PerpetualTask extends MultiTask {
         if(getCompletionCount() < 0) {
             setCompletionCount(0);
         }
-        if(getCompletionCount() >= getMaxCompletions()) {
-            reset();
-        }
+        // Perpetual tasks are never completed
     }
 
-    // FIXME: MultiTask should be split into
-    // LimitedTask and PerpetualTask to avoid redundant maxCompletions field
-
     public PerpetualTask(String name) {
-        super(name, Integer.MAX_VALUE);
+        super(name);
     }
 
     protected PerpetualTask() {}

@@ -1,29 +1,13 @@
 package com.malevitzch.todo.model;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 
 @Entity
-public class MultiTask extends Task {
-    private int completionCount = 0;
+public abstract class MultiTask extends Task {
+    protected int completionCount;
 
-    @Column
-    private int maxCompletions;
-
-    private void updateStatus() {
-        if(completionCount < 0) {
-            completionCount = 0;
-        }
-        if(completionCount >= maxCompletions) {
-            setCompleted(true);
-        } else {
-            setCompleted(false);
-        }
-    }
-
-    public MultiTask(String name, int maxCompletions) {
+    public MultiTask(String name) {
         super(name);
-        this.maxCompletions = maxCompletions;
     }
 
     public void complete() {
@@ -43,10 +27,6 @@ public class MultiTask extends Task {
     public void setCompletionCount(int n) {
         completionCount = n;
         updateStatus();
-    }
-
-    public int getMaxCompletions() {
-        return maxCompletions;
     }
 
     public void reset() {

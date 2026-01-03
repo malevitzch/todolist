@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.malevitzch.todo.model.LimitedTask;
 import com.malevitzch.todo.model.MultiTask;
 import com.malevitzch.todo.model.OneTimeTask;
 import com.malevitzch.todo.model.PerpetualTask;
@@ -41,8 +42,9 @@ public class WebController {
         if(perpetual)
             taskService.addTask(new PerpetualTask(name));
         else {
-            int maxCompletions = Integer.parseInt(json.get("maxCompletions"));  
-            taskService.addTask(new MultiTask(name, maxCompletions));
+            int maxCompletions = Integer.parseInt(json.get("maxCompletions"));
+            System.out.println("Max completions: " + maxCompletions);  
+            taskService.addTask(new LimitedTask(name, maxCompletions));
         }
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }

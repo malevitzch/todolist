@@ -5,6 +5,11 @@ import jakarta.persistence.Entity;
 @Entity
 public class OneTimeTask extends Task {
     
+    @Override
+    protected void updateStatus() {
+        // No-op for one-time tasks
+    }
+
     public OneTimeTask(String name) {
         super(name);
     }
