@@ -27,9 +27,17 @@ function AddSimpleTaskForm() {
     const handleSubmit = (e) => {
         e.preventDefault();
         const formData = new FormData(e.target);
-        e.target.reset(); 
 
-        multiAdder.mutate({ name: formData.get('name') });
+        multiAdder.mutate(
+            {
+                name: formData.get('name') 
+            },
+            {
+                onSuccess: () => {
+                    e.target.reset();
+                },
+            },
+        );
     };
 
     return (
@@ -49,16 +57,24 @@ function AddMultiTaskForm() {
     const handleSubmit = (e) => {
         e.preventDefault();
         const formData = new FormData(e.target);
-        e.target.reset(); 
+        
 
-        multiAdder.mutate({
-            name: formData.get('name'),
-            maxCompletions: parseInt(formData.get('maxCompletions')),
-            perpetual: perpetual});
+        multiAdder.mutate(
+            {
+                name: formData.get('name'),
+                maxCompletions: parseInt(formData.get('maxCompletions')),
+                perpetual: perpetual
+            },
+            {
+                onSuccess: () => {
+                    e.target.reset();
+                },
+            }
+        );
     };
 
     return (
-        // TODO: fully controlled form
+        // TODO: fully controlled form?
         <form onSubmit = {handleSubmit}>
             <div className="flex flex-col gap-1">
                 <div>Adding a new MultiTask</div>

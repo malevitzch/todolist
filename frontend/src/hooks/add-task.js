@@ -1,4 +1,4 @@
-import { useQueryClient, useMutation} from "@tanstack/react-query";
+import { useQueryClient, useMutation } from "@tanstack/react-query";
 import { addMultiTask, addSimpleTask } from "../services/tasks.js";
 
 function useAddTask(mutationFn, queryKey) {
@@ -8,6 +8,9 @@ function useAddTask(mutationFn, queryKey) {
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: [queryKey] });
         },
+        onError: (error) => {
+            throw error;
+        }
     });
 }
 
