@@ -38,13 +38,19 @@ public class WebController {
     }
     // TODO: maybe split into different endpoints for LimitedTask and PerpetualTask later
     @PostMapping("/api/tasks/add-multi")
-    public ResponseEntity<Void> addMultiTask(@RequestBody Map<String, String> json) {
-        // TODO: validate 
+    public ResponseEntity<String> addMultiTask(@RequestBody Map<String, String> json) {
+        // TODO: wonder about sending perpetual
+        if(!json.containsKey("name")) {
+            return ResponseEntity.badRequest().build();
+        }
         String name = json.get("name");
-        boolean perpetual = Boolean.parseBoolean(json.get("perpetual"));
-        if(perpetual)
+        boolean isPerpetual = Boolean.parseBoolean(json.get("perpetual"));
+        if(isPerpetual)
             taskService.addTask(new PerpetualTask(name));
         else {
+            if(!json.containsKey("maxCompletions")) {
+                return ResponseEntity.badRequest().build();
+            }
             int maxCompletions = Integer.parseInt(json.get("maxCompletions"));
             System.out.println("Max completions: " + maxCompletions);  
             taskService.addTask(new LimitedTask(name, maxCompletions));
@@ -54,7 +60,7 @@ public class WebController {
     @PostMapping("/api/tasks/add-simple")
     public ResponseEntity<Void> addSimpleTask(@RequestBody Map<String, String> json) {
         taskService.addTask(new OneTimeTask(json.get("name")));
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        return ResponseEntity.badRequest().build();
     }
 
     @PostMapping("/api/tasks/complete-multi")
@@ -62,10 +68,10 @@ public class WebController {
         String tag = json.get("tag");
         Task task = taskService.getTaskByTag(tag);
         if (task == null || !(task instanceof MultiTask)) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();     
+            return ResponseEntity.badRequest().build();     
         }
         if(json.get("count") == null) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();     
+            return ResponseEntity.badRequest().build();     
         }
         // FIXME: this should be a part of a task service, not the controller
         int count = Integer.parseInt(json.get("count"));
@@ -73,20 +79,20 @@ public class WebController {
         ((MultiTask)task).complete(count);
         taskService.updateTask(task);
 
-        return ResponseEntity.status(HttpStatus.OK).build();
+        return ResponseEntity.ok().build();
     }
 
     @PostMapping("/api/tasks/complete-onetime")
     public ResponseEntity<Void> completeOneTimeTask(@RequestBody Map<String, String> json) {
         String tag = json.get("tag");
         if(tag == null) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+            return ResponseEntity.badRequest().build();
         }
         Task task = taskService.getTaskByTag(tag);
         if (task == null || !(task instanceof OneTimeTask)) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            return ResponseEntity.notFound().build();
         }
         taskService.completeOneTimeTask(tag);
-        return ResponseEntity.status(HttpStatus.OK).build();
+        return ResponseEntity.ok().build();
     }
 }
