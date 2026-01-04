@@ -33,3 +33,13 @@ export async function updateMultiTaskCompletionCount({taskTag, delta}) {
     if(!res.ok)
         throw new Error('Failed to update');
 }
+
+export async function completeOneTimeTask({taskTag}) {
+    const res = await fetch('/api/tasks/complete-onetime', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ tag: taskTag }),
+    });
+    if(!res.ok)
+        throw new Error('Failed to complete one-time task');
+}

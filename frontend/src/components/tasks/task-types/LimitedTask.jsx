@@ -13,7 +13,6 @@ function TaskButton({ onClick, children }) {
 }
 
 export function LimitedTask({task}) {
-    const queryClient = useQueryClient();
     const updateCompletion = useUpdateMultiTaskCompletion();
     return (
         <TaskBox>

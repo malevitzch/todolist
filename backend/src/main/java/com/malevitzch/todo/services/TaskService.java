@@ -45,4 +45,12 @@ public class TaskService {
     public void updateTask(Task task) {
         repository.save(task);
     }
+
+    public void completeOneTimeTask(String tag) {
+        Task task = getTaskByTag(tag);
+        if (task != null) {
+            task.setCompleted(true);
+            updateTask(task);
+        }
+    }
 }

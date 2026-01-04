@@ -17,6 +17,9 @@ import com.malevitzch.todo.model.PerpetualTask;
 import com.malevitzch.todo.model.Task;
 import com.malevitzch.todo.services.TaskService;
 
+// FIXME: proper json input handling
+// TODO: maybe multiple controllers 
+
 @RestController
 public class WebController {
     private final TaskService taskService;
@@ -70,6 +73,20 @@ public class WebController {
         ((MultiTask)task).complete(count);
         taskService.updateTask(task);
 
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    @PostMapping("/api/tasks/complete-onetime")
+    public ResponseEntity<Void> completeOneTimeTask(@RequestBody Map<String, String> json) {
+        String tag = json.get("tag");
+        if(tag == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+        Task task = taskService.getTaskByTag(tag);
+        if (task == null || !(task instanceof OneTimeTask)) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        taskService.completeOneTimeTask(tag);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 }
