@@ -1,10 +1,6 @@
 import { TaskBox } from "../TaskBox.jsx";
 import { useCompleteOneTimeTask } from "../../../hooks/update-task.js";
 
-// FIXME: add completing one-time tasks
-
-
-
 export function OneTimeTask({task}) {
     const completeTask = useCompleteOneTimeTask();
     return (
