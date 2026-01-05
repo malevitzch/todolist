@@ -1,4 +1,5 @@
 ## TODO
+- Fix inconsistent naming conventions - simpleTask vs oneTimeTask
 - A "Composite" task
 - Finish the forms for TaskAdder
 - Implement auth for API

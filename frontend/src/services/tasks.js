@@ -13,7 +13,7 @@ export async function addMultiTask(task) {
 }
 
 export async function addSimpleTask(task) {
-    const res = await fetch('/api/tasks/add-simple', {
+    const res = await fetch('/api/tasks/simple/add', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -35,7 +35,7 @@ export async function updateMultiTaskCompletionCount({taskTag, delta}) {
 }
 
 export async function completeOneTimeTask({taskTag}) {
-    const res = await fetch('/api/tasks/complete-onetime', {
+    const res = await fetch('/api/tasks/simple/complete', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ tag: taskTag }),

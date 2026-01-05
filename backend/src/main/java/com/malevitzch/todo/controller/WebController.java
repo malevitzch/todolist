@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.malevitzch.todo.model.LimitedTask;
 import com.malevitzch.todo.model.MultiTask;
-import com.malevitzch.todo.model.OneTimeTask;
 import com.malevitzch.todo.model.PerpetualTask;
 import com.malevitzch.todo.model.Task;
 import com.malevitzch.todo.services.TaskService;
@@ -28,10 +27,6 @@ public class WebController {
         this.taskService = taskService;
     }
     
-    @GetMapping("/")
-    public String index() {
-        return "Hi";
-    }
     @GetMapping("/api/all")
     public List<Task> getPendingTasks() {
         return taskService.getPendingTasks();
@@ -57,11 +52,6 @@ public class WebController {
         }
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
-    @PostMapping("/api/tasks/add-simple")
-    public ResponseEntity<Void> addSimpleTask(@RequestBody Map<String, String> json) {
-        taskService.addTask(new OneTimeTask(json.get("name")));
-        return ResponseEntity.badRequest().build();
-    }
 
     @PostMapping("/api/tasks/complete-multi")
     public ResponseEntity<Void> completeMultiTask(@RequestBody Map<String, String> json) {
@@ -79,20 +69,6 @@ public class WebController {
         ((MultiTask)task).complete(count);
         taskService.updateTask(task);
 
-        return ResponseEntity.ok().build();
-    }
-
-    @PostMapping("/api/tasks/complete-onetime")
-    public ResponseEntity<Void> completeOneTimeTask(@RequestBody Map<String, String> json) {
-        String tag = json.get("tag");
-        if(tag == null) {
-            return ResponseEntity.badRequest().build();
-        }
-        Task task = taskService.getTaskByTag(tag);
-        if (task == null || !(task instanceof OneTimeTask)) {
-            return ResponseEntity.notFound().build();
-        }
-        taskService.completeOneTimeTask(tag);
         return ResponseEntity.ok().build();
     }
 }
