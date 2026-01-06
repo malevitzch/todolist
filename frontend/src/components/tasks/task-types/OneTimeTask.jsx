@@ -8,15 +8,13 @@ export function OneTimeTask({task}) {
             <div className = "bg-blue-500 rounded-full text-center px-2">
                 {task.name}
             </div>
-            <div className="pt-0.5">
-                <button type="button" 
-                        onClick={() => completeTask.mutate({taskTag: task.tag})} 
-                        className="w-full text-center bg-blue-400 rounded-full 
-                                   hover:shadow-md hover:bg-blue-500 
-                                   active:scale-y-90 active:scale-x-95 transition-transform duration-75">
-                    Complete
-                </button>
-            </div>
+            <button type="button" 
+                    onClick={() => completeTask.mutate({taskTag: task.tag})} 
+                    className="w-full text-center bg-blue-400 rounded-full 
+                               hover:shadow-md hover:bg-blue-500 
+                               active:scale-y-90 active:scale-x-95 transition-transform duration-75">
+                Complete
+            </button>
         </TaskBox>
     )
 }

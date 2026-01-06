@@ -1,4 +1,5 @@
 ## TODO
+- Reusability in task components (a "Common" file which exports common components)
 - Fix inconsistent naming conventions - simpleTask vs oneTimeTask
 - A "Composite" task
 - Finish the forms for TaskAdder

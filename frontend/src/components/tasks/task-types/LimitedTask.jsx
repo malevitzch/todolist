@@ -17,7 +17,7 @@ export function LimitedTask({task}) {
     return (
         <TaskBox>
             <div className="h-1/3 text-center bg-blue-500 rounded-xl">{task.tag}</div>
-            <div className="h-2/3 flex flex-row items-center pt-0.5">
+            <div className="h-2/3 flex flex-row items-center">
                 <div className="rounded-full text-center w-1/4 px-2 bg-blue-400">
                     {task.completionCount}/{task.maxCompletions}
                 </div>

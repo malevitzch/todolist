@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 
-export function useSimpleTasks() {
+export function useTasks() {
     return useQuery({
         queryKey: ['tasks'],
         queryFn: async () => {

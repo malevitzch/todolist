@@ -33,7 +33,7 @@ public class WebController {
     }
     // TODO: maybe split into different endpoints for LimitedTask and PerpetualTask later
     @PostMapping("/api/tasks/add-multi")
-    public ResponseEntity<String> addMultiTask(@RequestBody Map<String, String> json) {
+    public ResponseEntity<Void> addMultiTask(@RequestBody Map<String, String> json) {
         // TODO: wonder about sending perpetual
         if(!json.containsKey("name")) {
             return ResponseEntity.badRequest().build();
