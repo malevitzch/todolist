@@ -1,22 +1,29 @@
 import { useState } from "react";
-import { useQueryClient, useMutation} from "@tanstack/react-query";
 import { useAddMultiTask, useAddSimpleTask } from "../../hooks/add-task.js";
 
-function TaskAdderMenuButton({onClick, children}) {
+// FIXME: the animation should play till the end
+function TaskAdderMenuButton({onClick, lit, children}) {
     return (
         <button type="button" onClick={onClick}
-            className="px-2 py-1 bg-blue-400 rounded-full hover:shadow-md
-             hover:bg-blue-500 active:scale-90 transition-transform duration-75">
+            className={`px-2 py-1 rounded-full 
+                ${lit 
+                    ? "bg-blue-500" 
+                    : "bg-blue-400 hover:shadow-md hover:bg-blue-500 active:scale-90 transition-transform duration-75"}
+             `}>
             {children}
         </button>
     )
 }
 
-function TaskAdderMenu({setMode}) {
+function TaskAdderMenu({mode, setMode}) {
     return (
         <div>
-            <TaskAdderMenuButton onClick={() => setMode('add-simple')}>New Simple Task</TaskAdderMenuButton>
-            <TaskAdderMenuButton onClick={() => setMode('add-multi')}>New Multi Task</TaskAdderMenuButton>
+            <TaskAdderMenuButton lit={mode === 'add-simple'} onClick={() => setMode('add-simple')}>
+                New Simple Task
+            </TaskAdderMenuButton>
+            <TaskAdderMenuButton lit={mode === 'add-multi'} onClick={() => setMode('add-multi')}>
+                New Multi Task
+            </TaskAdderMenuButton>
         </div>
     )
 }
@@ -93,7 +100,7 @@ function AddMultiTaskForm() {
                         className="px-1 py-1 bg-blue-400 focus:bg-blue-500 focus:outline-none"/>
                     Perpetual Task
                 </label>
-                <button type="submit" className="px-2 py-1 bg-blue-400 rounded-full hover:shadow-md
+                <button type="submit" className="px-2 py-1 bg-blue-400 rounded-full hover:bg-blue-500 hover:shadow-md
                     active:scale-y-90 active:scale-x-96 transition-transform duration-75">
                     Submit
                 </button>
@@ -107,7 +114,7 @@ export function TaskAdder() {
 
     return (
         <div>
-            <TaskAdderMenu setMode={setMode} />
+            <TaskAdderMenu mode={mode} setMode={setMode} />
             {mode === 'default' && <div>Nothing here yet</div>}
             {mode === 'add-multi' && <AddMultiTaskForm />}
             {mode === 'add-simple'&& <AddSimpleTaskForm />}
