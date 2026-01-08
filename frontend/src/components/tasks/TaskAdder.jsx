@@ -5,11 +5,12 @@ import { useAddMultiTask, useAddSimpleTask } from "../../hooks/add-task.js";
 function TaskAdderMenuButton({onClick, lit, children}) {
     return (
         <button type="button" onClick={onClick}
-            className={`px-2 py-1 rounded-full 
+            className={`px-2 py-1 rounded-full transition-all duration-200
                 ${lit 
                     ? "bg-blue-500" 
-                    : "bg-blue-400 hover:shadow-md hover:bg-blue-500 active:scale-90 transition-transform duration-75"}
-             `}>
+                    : "bg-blue-400 hover:shadow-md hover:bg-blue-500"}
+             `}
+            disabled={lit}>
             {children}
         </button>
     )

@@ -13,7 +13,7 @@ import jakarta.persistence.InheritanceType;
 import jakarta.persistence.Table;
 
 @Entity
-@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+@Inheritance(strategy=InheritanceType.JOINED)
 // We have an index on the name columns since we are likely to search by name
 @Table(indexes = {@Index(name = "idx_name", columnList = "name, id")})
 @JsonTypeInfo(
