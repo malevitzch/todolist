@@ -13,17 +13,17 @@ import com.malevitzch.todo.model.Task;
 import com.malevitzch.todo.services.TaskService;
 
 @RestController
-@RequestMapping("/api/tasks/simple")
-public class SimpleTaskController {
+@RequestMapping("/api/tasks/one-time")
+public class OneTimeTaskController {
 
     private final TaskService taskService;
 
-    public SimpleTaskController(TaskService taskService) {
+    public OneTimeTaskController(TaskService taskService) {
         this.taskService = taskService;
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Void> addSimpleTask(@RequestBody Map<String, String> json) {
+    public ResponseEntity<Void> addOneTimeTask(@RequestBody Map<String, String> json) {
         taskService.addTask(new OneTimeTask(json.get("name")));
         return ResponseEntity.ok().build();
     }

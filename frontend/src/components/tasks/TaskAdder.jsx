@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useAddMultiTask, useAddSimpleTask } from "../../hooks/add-task.js";
+import { useAddMultiTask, useAddOneTimeTask } from "../../hooks/add-task.js";
 
 // FIXME: the animation should play till the end
 function TaskAdderMenuButton({onClick, lit, children}) {
@@ -19,8 +19,8 @@ function TaskAdderMenuButton({onClick, lit, children}) {
 function TaskAdderMenu({mode, setMode}) {
     return (
         <div>
-            <TaskAdderMenuButton lit={mode === 'add-simple'} onClick={() => setMode('add-simple')}>
-                New Simple Task
+            <TaskAdderMenuButton lit={mode === 'add-one-time'} onClick={() => setMode('add-one-time')}>
+                New One-Time Task
             </TaskAdderMenuButton>
             <TaskAdderMenuButton lit={mode === 'add-multi'} onClick={() => setMode('add-multi')}>
                 New Multi Task
@@ -29,14 +29,14 @@ function TaskAdderMenu({mode, setMode}) {
     )
 }
 
-function AddSimpleTaskForm() {
-    const multiAdder = useAddSimpleTask();
+function AddOneTimeTaskForm() {
+    const oneTimeAdder = useAddOneTimeTask();
 
     const handleSubmit = (e) => {
         e.preventDefault();
         const formData = new FormData(e.target);
 
-        multiAdder.mutate(
+        oneTimeAdder.mutate(
             {
                 name: formData.get('name') 
             },
@@ -50,7 +50,7 @@ function AddSimpleTaskForm() {
 
     return (
         <form onSubmit = {handleSubmit}>
-            <div>Adding a new SimpleTask</div>
+            <div>Adding a new OneTimeTask</div>
             <input type="text" name="name" placeholder="Task Name" required autoComplete="off" 
                 className="px-1 py-1 bg-blue-400 focus:bg-blue-500 focus:outline-none"/>
         </form>
@@ -111,14 +111,14 @@ function AddMultiTaskForm() {
 }
 
 export function TaskAdder() {
-    const [mode, setMode] = useState('add-multi'); // 'default' | 'add-simple' | 'add-multi'
+    const [mode, setMode] = useState('add-multi'); // 'default' | 'add-one-time' | 'add-multi'
 
     return (
         <div>
             <TaskAdderMenu mode={mode} setMode={setMode} />
             {mode === 'default' && <div>Nothing here yet</div>}
             {mode === 'add-multi' && <AddMultiTaskForm />}
-            {mode === 'add-simple'&& <AddSimpleTaskForm />}
+            {mode === 'add-one-time' && <AddOneTimeTaskForm />}
         </div>
     )
 }

@@ -12,8 +12,8 @@ export async function addMultiTask(task) {
         throw new Error('Failed to add task');
 }
 
-export async function addSimpleTask(task) {
-    const res = await fetch('/api/tasks/simple/add', {
+export async function addOneTimeTask(task) {
+    const res = await fetch('/api/tasks/one-time/add', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -35,7 +35,7 @@ export async function updateMultiTaskCompletionCount({taskTag, delta}) {
 }
 
 export async function completeOneTimeTask({taskTag}) {
-    const res = await fetch('/api/tasks/simple/complete', {
+    const res = await fetch('/api/tasks/one-time/complete', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ tag: taskTag }),

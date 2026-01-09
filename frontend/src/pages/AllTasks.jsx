@@ -1,5 +1,5 @@
-import { TaskList } from "../components/tasks/TaskList";
-import { TaskAdder } from "../components/tasks/TaskAdder";
+import { TaskList } from "../components/tasks/TaskList.jsx";
+import { TaskAdder } from "../components/tasks/TaskAdder.jsx";
 export function AllTasks() {
     return (
         <div className="flex h-screen overflow-hidden">
