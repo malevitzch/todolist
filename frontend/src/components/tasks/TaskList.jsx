@@ -1,4 +1,3 @@
-import { useTasks } from "../../hooks/useTasks"
 import { TaskBox }  from "./TaskBox.jsx"
 import { LimitedTask } from "./task-types/LimitedTask.jsx"
 import { OneTimeTask } from "./task-types/OneTimeTask.jsx"
@@ -23,8 +22,7 @@ function ErrorTask({task}) {
     )
 }
 
-export function TaskList() {
-    const {data, isLoading, error} = useTasks();
+export function TaskList({data, isLoading, error}) {
     if(error) {
         return <div>Error: {error.message}</div>;
     }

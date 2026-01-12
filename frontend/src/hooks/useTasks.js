@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 
-export function useTasks() {
+export function useOngoingTasks() {
     return useQuery({
         queryKey: ['tasks'],
         queryFn: async () => {
