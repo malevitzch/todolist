@@ -43,3 +43,12 @@ export async function completeOneTimeTask({taskTag}) {
     if(!res.ok)
         throw new Error('Failed to complete one-time task');
 }
+export async function uncompleteOneTimeTask({taskTag}) {
+    const res = await fetch('/api/tasks/one-time/uncomplete', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ tag: taskTag }),
+    });
+    if(!res.ok)
+        throw new Error('Failed to uncomplete one-time task');
+}

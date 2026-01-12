@@ -14,7 +14,10 @@ public class LimitedTask extends MultiTask {
         if(getCompletionCount() < 0) {
             setCompletionCount(0);
         }
-        if(getCompletionCount() >= maxCompletions) {
+        if(getCompletionCount() > maxCompletions) {
+            setCompletionCount(maxCompletions);
+        }
+        if(getCompletionCount() == maxCompletions) {
             setCompleted(true);
         } else {
             setCompleted(false);

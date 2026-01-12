@@ -41,4 +41,20 @@ public class OneTimeTaskController {
         taskService.completeOneTimeTask(tag);
         return ResponseEntity.ok().build();
     }
+    
+    // TODO: those 2 methods should be a setCompletionStatus with a bool param,
+    // but keeping separate endpoints for a nicer API
+    @PostMapping("/uncomplete")
+    public ResponseEntity<Void> uncompleteOneTimeTask(@RequestBody Map<String, String> json) {
+        String tag = json.get("tag");
+        if(tag == null) {
+            return ResponseEntity.badRequest().build();
+        }
+        Task task = taskService.getTaskByTag(tag);
+        if (task == null || !(task instanceof OneTimeTask)) {
+            return ResponseEntity.notFound().build();
+        }
+        taskService.uncompleteOneTimeTask(tag);
+        return ResponseEntity.ok().build();
+    }
 }

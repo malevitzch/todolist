@@ -27,10 +27,19 @@ public class WebController {
         this.taskService = taskService;
     }
     
-    @GetMapping("/api/all")
-    public List<Task> getPendingTasks() {
-        return taskService.getPendingTasks();
+    @GetMapping("/api/tasks/ongoing")
+    public List<Task> getOngoingTasks() {
+        return taskService.getOngoingTasks();
     }
+    @GetMapping("/api/tasks/completed")
+    public List<Task> getCompletedTasks() {
+        return taskService.getCompletedTasks();
+    }
+    @GetMapping("/api/tasks/all")
+    public List<Task> getAllTasks() {
+        return taskService.getAllTasks();
+    }
+
     // TODO: maybe split into different endpoints for LimitedTask and PerpetualTask later
     @PostMapping("/api/tasks/add-multi")
     public ResponseEntity<Void> addMultiTask(@RequestBody Map<String, String> json) {

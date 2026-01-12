@@ -1,8 +1,8 @@
 import { TaskList } from "../components/tasks/TaskList.jsx";
 import { TaskAdder } from "../components/tasks/TaskAdder.jsx";
-import { useOngoingTasks } from "../hooks/useTasks.js";
+import { useAllTasks } from "../hooks/useTasks.js";
 export function AllTasks() {
-    const {data, isLoading, error} = useOngoingTasks();
+    const {data, isLoading, error} = useAllTasks();
     return (
         <div className="flex h-screen overflow-hidden">
             <div className="flex w-2/3 bg-blue-200">

@@ -1,5 +1,8 @@
 ## TODO
-= Implement LimitedTaskController or get rid of it
+- Implement LimitedTaskController or get rid of it
+- Better indicate when a task is completed
+- Ability to filter by completed, uncompleted, etc, probably through a task search API which takes arguments and filters accordingly
+- Rework frontend colors
 - Reusability in task components (a "Common" file which exports common components)
 - A "Composite" task
 - Finish the forms for TaskAdder

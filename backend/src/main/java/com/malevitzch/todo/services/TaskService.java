@@ -23,8 +23,12 @@ public class TaskService {
         return repository.findByCompletedTrue();
     }
 
-    public List<Task> getPendingTasks() {
+    public List<Task> getOngoingTasks() {
         return repository.findByCompletedFalse();
+    }
+
+    public List<Task> getAllTasks() {
+        return repository.findAll();
     }
 
     public Task getTaskByTag(String tag) {
@@ -50,6 +54,13 @@ public class TaskService {
         Task task = getTaskByTag(tag);
         if (task != null) {
             task.setCompleted(true);
+            updateTask(task);
+        }
+    }
+    public void uncompleteOneTimeTask(String tag) {
+        Task task = getTaskByTag(tag);
+        if (task != null) {
+            task.setCompleted(false);
             updateTask(task);
         }
     }
