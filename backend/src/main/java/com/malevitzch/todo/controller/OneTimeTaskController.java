@@ -1,16 +1,19 @@
 package com.malevitzch.todo.controller;
 
-import java.util.Map;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.malevitzch.todo.dto.onetime.AddOneTimeTaskRequest;
+import com.malevitzch.todo.dto.onetime.CompleteOneTimeTaskRequest;
+import com.malevitzch.todo.dto.onetime.UncompleteOneTimeTaskRequest;
 import com.malevitzch.todo.model.OneTimeTask;
 import com.malevitzch.todo.model.Task;
 import com.malevitzch.todo.services.TaskService;
+
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/tasks/one-time")
@@ -23,17 +26,16 @@ public class OneTimeTaskController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Void> addOneTimeTask(@RequestBody Map<String, String> json) {
-        taskService.addTask(new OneTimeTask(json.get("name")));
+    public ResponseEntity<Void> addOneTimeTask(
+        @Valid @RequestBody AddOneTimeTaskRequest request) {
+        taskService.addTask(new OneTimeTask(request.name()));
         return ResponseEntity.ok().build();
     }
 
     @PostMapping("/complete")
-    public ResponseEntity<Void> completeOneTimeTask(@RequestBody Map<String, String> json) {
-        String tag = json.get("tag");
-        if(tag == null) {
-            return ResponseEntity.badRequest().build();
-        }
+    public ResponseEntity<Void> completeOneTimeTask(
+        @Valid @RequestBody CompleteOneTimeTaskRequest request) {
+        String tag = request.tag();
         Task task = taskService.getTaskByTag(tag);
         if (task == null || !(task instanceof OneTimeTask)) {
             return ResponseEntity.notFound().build();
@@ -42,14 +44,10 @@ public class OneTimeTaskController {
         return ResponseEntity.ok().build();
     }
     
-    // TODO: those 2 methods should be a setCompletionStatus with a bool param,
-    // but keeping separate endpoints for a nicer API
     @PostMapping("/uncomplete")
-    public ResponseEntity<Void> uncompleteOneTimeTask(@RequestBody Map<String, String> json) {
-        String tag = json.get("tag");
-        if(tag == null) {
-            return ResponseEntity.badRequest().build();
-        }
+    public ResponseEntity<Void> uncompleteOneTimeTask(
+        @Valid @RequestBody UncompleteOneTimeTaskRequest request) {
+        String tag = request.tag();
         Task task = taskService.getTaskByTag(tag);
         if (task == null || !(task instanceof OneTimeTask)) {
             return ResponseEntity.notFound().build();
