@@ -1,5 +1,6 @@
 ## TODO
-- Implement LimitedTaskController or get rid of it
+- Finish the request body changes so that they all use DTOs rather than Java maps
+- Clean up the services in frontend, make sure there is not too much random abstraction since the boilerplate seems high
 - Better indicate when a task is completed
 - Ability to filter by completed, uncompleted, etc, probably through a task search API which takes arguments and filters accordingly
 - Rework frontend colors
